@@ -7,3 +7,14 @@
 meteor-platform
 autopublish
 insecure
+mizzao:bootstrap-3
+underscore
+dburles:google-maps
+iron:router
+monbro:soundcloud-nodejs-api-wrapper
+ian:accounts-ui-bootstrap-3
+accounts-password
+mrt:accounts-soundcloud
+mrt:soundcloud
+quietcreep:accounts-soundcloud
+service-configuration

@@ -1,0 +1,12 @@
+<template name="userProfile">
+  <h1>Welcome, {{currentUser.profile.name}}</h1>
+
+  <button type="button" id="update-location">Set Location</button>
+
+  <h3>Here are your favorite tracks from SoundCloud:</h3>
+ {{getFaves}}
+
+ <div id="favorites-container"></div>
+
+
+ </template>
