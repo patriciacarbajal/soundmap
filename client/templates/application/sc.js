@@ -1,16 +1,8 @@
 
-
-// var DataHelpers = {
-//        getTrackData : function(id){
-//            return _.find(Soundcloud.getFavorites(), function(f){
-//               data : DataHelpers.getTrackData(id)
-//           });
-//       }
-//   };
-
 Soundcloud = {
     
     checkOAuth : function(){
+        console.log("1")
 
         var Soundcloud = this;
 

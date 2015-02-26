@@ -1,7 +1,8 @@
 <template name="userProfile">
-  <h1>Welcome, {{currentUser.profile.name}}</h1>
+  <h1>Welcome, {{currentUser.services.soundCloud.full_name}}</h1>
 
   <button type="button" id="update-location">Set Location</button>
+  <li><a href=" {{pathFor 'soundMap'}} ">Map</a></li>
 
   <h3>Here are your favorite tracks from SoundCloud:</h3>
  {{getFaves}}

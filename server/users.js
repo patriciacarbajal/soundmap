@@ -1,4 +1,4 @@
-
+if (Meteor.isServer){
   Meteor.startup(function () {
 
     Accounts.loginServiceConfiguration.remove({
@@ -10,14 +10,21 @@
         clientId : process.env.SC_CLIENT_ID,
         secret : process.env.SC_CLIENT_SECRET
     });
-    
-});
 
-Accounts.onCreateUser(function(user) {
+  // ServiceConfiguration.configurations.upsert(
+  //   {service: "soundcloud"},
+  //   {
+  //     $set: {
+  //       clientId: process.env.SC_CLIENT_ID,
+  //       loginStyle: "popup",
+  //       secret: process.env.SC_CLIENT_SECRET
+  //     }
+  //    } 
+  // );
 
-    user.profile['lat'] = 0;
-    user.profile['lng'] = 0;
-    user.profile['favoritesUrls'] = [];
-    user.profile['favoritesTitles'] = [];
-    return user;
-});
+  
+
+ });
+
+}
+

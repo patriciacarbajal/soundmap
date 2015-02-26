@@ -1,0 +1,11 @@
+<template name="welcome">
+ 
+
+  {{#if currentUser}}
+    <li><a href=" {{pathFor 'userProfile'}} ">Profile</a></li>
+  {{else}}
+     <h1>Please sign in to continue</h1>
+  {{/if}}
+
+
+</template>

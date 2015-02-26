@@ -5,7 +5,7 @@ Template.soundMap.helpers({
     if (GoogleMaps.loaded()) {
       var user = Meteor.user()
       return {
-          center: {lat: user.profile.lat, lng: user.profile.lng},
+          center: {lat: userLat, lng: userLng},
           zoom: 2
       };
     };
@@ -20,11 +20,11 @@ Template.soundMap.helpers({
 });
 
 Template.soundMap.created = function() {
-  var user = Meteor.user();
 
   GoogleMaps.ready('exampleMap', function(map) {
+    var user = Meteor.user();
     var marker = new google.maps.Marker({
-      position: {lat: user.profile.lat, lng: user.profile.lng},
+      position: {lat: userLat, lng: userLng},
       map: map.instance
     });
   });
