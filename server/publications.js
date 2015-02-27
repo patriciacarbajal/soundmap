@@ -16,4 +16,20 @@ if (Meteor.isServer) {
       return Meteor.users.find({});
     } 
   });
+
+
+  Meteor.publish("markerData", function () {
+    return Markers.find( {},
+      {fields: { user: 1, latitude: 1, longitude: 1 }});
+  })
+
+  Meteor.publish("markers",function () {
+    return Markers.find();
+  })
+
+  Meteor.methods({
+    insertNewMarker: function (user, latitude, longitude) {
+    Markers.insert({ user: user, latitude: latitude, longitude: longitude });
+  }
+});
 }

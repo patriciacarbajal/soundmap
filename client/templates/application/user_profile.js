@@ -1,6 +1,9 @@
+
 Tracker.autorun(function () {
   Meteor.subscribe("userData");
   Meteor.subscribe("users");
+  Meteor.subscribe("markers");
+  Meteor.subscribe('markerData');
 });
 
 Template.userProfile.helpers({
@@ -13,8 +16,6 @@ Template.userProfile.helpers({
     },
 
   getFaves: function() {
-    console.log("getfaves")
-
     var user = Meteor.user();
     var user_id =  user.services.soundCloud.id;
     var urls = [];
@@ -29,30 +30,20 @@ Template.userProfile.helpers({
           titles[i] = tracks[i].title;
           }
       Meteor.users.update( { _id: Meteor.userId()}, { $set: { profile: {favoritesUrls: urls, favoritesTitles: titles }}});
-
     })
-
   }
-
 });
 
 Template.userProfile.events({
-
   'click #update-location': function(){
-
     function success(pos) {
       var userCrd = pos.coords;
       userLng = pos.coords.longitude;
       userLat = pos.coords.latitude;
       console.log( "Lat: " +userLat + " Lng: " + userLng)
       Meteor.users.update( { _id: Meteor.userId()}, { $set: { profile: { userLatitude: userLat, userLongitude: userLng }}});
-      console.log(Meteor.user())
-
+      Meteor.call('insertNewMarker', Meteor.userId(), userLat, userLng);
     };
-
     navigator.geolocation.getCurrentPosition(success);
-
-
-}
-
+  }
 });
