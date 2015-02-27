@@ -32,4 +32,16 @@ if (Meteor.isServer) {
     Markers.insert({ user: user, latitude: latitude, longitude: longitude });
   }
 });
+
+  Meteor.methods({
+    updateUserLocation: function (latitude, longitude) {
+    Users.update( Meteor.userId(), { latitude: latitude, longitude: longitude });
+  }
+});
+
+  Users.allow({
+    update:  function(userId, doc) {
+    return doc && doc.userId === userId;
+  }
+  })
 }

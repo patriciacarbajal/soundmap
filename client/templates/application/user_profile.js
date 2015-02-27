@@ -30,6 +30,7 @@ Template.userProfile.helpers({
           titles[i] = tracks[i].title;
           }
       Meteor.users.update( { _id: Meteor.userId()}, { $set: { profile: {favoritesUrls: urls, favoritesTitles: titles }}});
+       // Users.update( Meteor.userId(), { $set: { profile: {favoritesUrls: urls, favoritesTitles: titles }}});
     })
   }
 });
@@ -41,8 +42,9 @@ Template.userProfile.events({
       userLng = pos.coords.longitude;
       userLat = pos.coords.latitude;
       console.log( "Lat: " +userLat + " Lng: " + userLng)
-      Meteor.users.update( { _id: Meteor.userId()}, { $set: { profile: { userLatitude: userLat, userLongitude: userLng }}});
-      Meteor.call('insertNewMarker', Meteor.userId(), userLat, userLng);
+      Meteor.users.update( {_id: Meteor.userId()}, { $set: { profile: { userLatitude: userLat, userLongitude: userLng }}});
+      // Meteor.call('updateUserLocation', userLat, userLng);
+      Meteor.call('insertNewMarker', Meteor.userId(),  userLat, userLng);
     };
     navigator.geolocation.getCurrentPosition(success);
   }

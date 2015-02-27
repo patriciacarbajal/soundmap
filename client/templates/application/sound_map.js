@@ -13,7 +13,7 @@ Template.soundMap.helpers({
     if (GoogleMaps.loaded()) {
       var user = Meteor.user()
       return {
-          center: {lat: user.profile.userLatitude, lng: user.profile.userLongitude},
+          center: {lat: 40, lng: -70},
           zoom: 2
       };
     };
@@ -30,25 +30,20 @@ Template.soundMap.helpers({
 Template.soundMap.created = function() {
 
   GoogleMaps.ready('exampleMap', function(map) {
-    var user = Meteor.user();
-    var marker = new google.maps.Marker({
-      position: {lat: user.profile.userLatitude, lng: user.profile.userLongitude},
-      map: map.instance,
-      customInfo: "userMarker",
-    });
+    var allMarkers = Markers.find().fetch();
+    for  (var i = 0; i < allMarkers.length; i++){
+      var user = Meteor.users.findOne(allMarkers[i].user);
+      var marker = new google.maps.Marker({
+        position: {lat: allMarkers[i].latitude, lng: allMarkers[i].longitude},
+        map: map.instance,
+        customInfo: user.profile.favoritesTitles
+      });
 
     google.maps.event.addListener(marker, 'click', function() {
-      alert(user.services.soundCloud.full_name)
+      alert(this.customInfo)
     });
+  }
   });
 };
-
-// Template.soundMap.events({
-
-//   'click marker': function(){
-//     alert("!!");
-//   }
-// });
-
 
 
